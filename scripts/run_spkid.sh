@@ -38,7 +38,7 @@ TEMP_VERIF=$w/temp_${FEAT:-$1}_${name_exp}.log
 
 #Parametros para la parametrización
 #LP
-LPC_order=10
+LPC_order=14
 #LPCC
 LPCC_order=25
 LPCC_cepstrum_order=25
@@ -48,8 +48,8 @@ MFCC_filter_bank=26
 MFCC_freq=8
 
 #Parametros para entrenar GMM
-TO_nmix=30               #-m mix\tNumber of mixtures (def. " << DEF_NMIXTURES << ")
-TO_Num_it_fin=30         #-N ite\tNumber of final iterations of EM (def. " << DEF_ITERATIONS << ")
+TO_nmix=60               #-m mix\tNumber of mixtures (def. " << DEF_NMIXTURES << ")
+TO_Num_it_fin=60         #-N ite\tNumber of final iterations of EM (def. " << DEF_ITERATIONS << ")
 TO_LogProb_th_fin=0.e-6  #-T thr\tLogProbability threshold of final EM iterations (def. " << DEF_THR << ")
 TO_init_method=1         #-i init\tInitialization method: 0=random, 1=VQ, 2=EM split (def. 0)   
 
@@ -253,7 +253,7 @@ for cmd in $*; do
        EXEC="gmm_verify -d $w/$FEAT/ -e $FEAT -D $w/gmm/$FEAT/ -E gmm -w $world lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates"
        echo $EXEC && $EXEC | tee $TEMP_VERIF || exit 1
        perl -ane 'print "$F[0]\t$F[1]\t";
-        if ($F[2] > 0.511157268750201) {print "1\n"}
+        if ($F[2] > -0.474063685219194) {print "1\n"}
         else {print "0\n"}' $TEMP_VERIF | tee $FINAL_VERIF
 
    
